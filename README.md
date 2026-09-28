@@ -151,6 +151,13 @@ const router = createProgressiveWebMcpRouter({
 
 ---
 
+## Acknowledgements
+
+- **[hotchpotch/bekko-embedding-v1-a8m](https://huggingface.co/hotchpotch/bekko-embedding-v1-a8m)**: Compact multilingual embedding model created by Yuichi Tateno (hotchpotch), licensed under MIT.
+- **[@huggingface/transformers](https://github.com/huggingface/transformers.js)**: In-browser ML runtime developed by Hugging Face, licensed under Apache-2.0.
+
+---
+
 ## License
 
 MIT (c) 2026 DISMUS
