@@ -160,4 +160,4 @@ const router = createProgressiveWebMcpRouter({
 
 ## License
 
-MIT (c) 2026 DISMUS
+MIT (c) 2026 DISMUS4
