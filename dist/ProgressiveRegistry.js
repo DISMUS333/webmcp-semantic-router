@@ -3,7 +3,7 @@
  *
  * Core registry that implements progressive disclosure and capability-scoped execution.
  * Maintains stable surface tools (preventing LLM multi-step plan disruption),
- * protects in-flight executions during tool state changes (W3C Issue #218),
+ * protects in-flight executions during tool state changes (WebMCP § 3.1 Pending tool executions),
  * and proxies dynamic tools securely through strongly-bound tokens.
  */
 var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
@@ -42,7 +42,7 @@ function combineAbortSignals(signals) {
 export class ProgressiveRegistry {
     constructor(options) {
         this.catalog = new Map();
-        /** Tracks currently executing tools to ensure safe completion (W3C Issue #218) */
+        /** Tracks currently executing tools to ensure safe completion (WebMCP § 3.1) */
         this.inFlightExecutions = new Set();
         _ProgressiveRegistry_executionCounter.set(this, 0);
         this.abortController = null;
@@ -149,7 +149,7 @@ export class ProgressiveRegistry {
     }
     /**
      * Safely unmounts surface tools.
-     * Aligned with W3C Issue #218: In-flight executions are allowed to complete gracefully.
+     * Aligned with WebMCP § 3.1: In-flight executions are allowed to complete gracefully.
      */
     unmount() {
         var _a;
@@ -279,7 +279,7 @@ export class ProgressiveRegistry {
     }
     /**
      * Securely executes a tool using a strongly-bound Capability Token.
-     * Enforces token validity, prevents Confused Deputy attacks, and tracks in-flight lifecycle (Issue #218).
+     * Enforces token validity, prevents Confused Deputy attacks, and tracks in-flight lifecycle (WebMCP § 3.1).
      */
     async executeCapability(tokenString, toolName, args, options) {
         var _a;
@@ -321,7 +321,7 @@ export class ProgressiveRegistry {
                 }
             }
         }
-        // 5. In-flight execution tracking (W3C Issue #218 safety contract)
+        // 5. In-flight execution tracking (WebMCP § 3.1 Pending tool executions)
         const executionId = `exec_${toolName}_${Date.now()}_${__classPrivateFieldSet(this, _ProgressiveRegistry_executionCounter, (_a = __classPrivateFieldGet(this, _ProgressiveRegistry_executionCounter, "f"), ++_a), "f")}`;
         this.inFlightExecutions.add(executionId);
         const isReadOnly = tool.annotations?.readOnlyHint === true;

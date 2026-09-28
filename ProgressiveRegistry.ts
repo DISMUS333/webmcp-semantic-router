@@ -3,7 +3,7 @@
  * 
  * Core registry that implements progressive disclosure and capability-scoped execution.
  * Maintains stable surface tools (preventing LLM multi-step plan disruption),
- * protects in-flight executions during tool state changes (W3C Issue #218),
+ * protects in-flight executions during tool state changes (WebMCP § 3.1 Pending tool executions),
  * and proxies dynamic tools securely through strongly-bound tokens.
  */
 
@@ -51,7 +51,7 @@ export class ProgressiveRegistry {
     private readonly maxCandidates: number;
     private readonly lifecycle: ProgressiveRouterLifecycle;
 
-    /** Tracks currently executing tools to ensure safe completion (W3C Issue #218) */
+    /** Tracks currently executing tools to ensure safe completion (WebMCP § 3.1) */
     private readonly inFlightExecutions = new Set<string>();
     #executionCounter = 0;
 
@@ -174,7 +174,7 @@ export class ProgressiveRegistry {
 
     /**
      * Safely unmounts surface tools.
-     * Aligned with W3C Issue #218: In-flight executions are allowed to complete gracefully.
+     * Aligned with WebMCP § 3.1: In-flight executions are allowed to complete gracefully.
      */
     public unmount(): { inFlightCount: number } {
         ++this.#mountGeneration;
@@ -331,7 +331,7 @@ export class ProgressiveRegistry {
 
     /**
      * Securely executes a tool using a strongly-bound Capability Token.
-     * Enforces token validity, prevents Confused Deputy attacks, and tracks in-flight lifecycle (Issue #218).
+     * Enforces token validity, prevents Confused Deputy attacks, and tracks in-flight lifecycle (WebMCP § 3.1).
      */
     public async executeCapability(
         tokenString: string,
@@ -384,7 +384,7 @@ export class ProgressiveRegistry {
             }
         }
 
-        // 5. In-flight execution tracking (W3C Issue #218 safety contract)
+        // 5. In-flight execution tracking (WebMCP § 3.1 Pending tool executions)
         const executionId = `exec_${toolName}_${Date.now()}_${++this.#executionCounter}`;
         this.inFlightExecutions.add(executionId);
         const isReadOnly = tool.annotations?.readOnlyHint === true;

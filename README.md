@@ -4,7 +4,7 @@ A capability-scoped tool router for the W3C WebMCP draft specification.
 
 It addresses common integration challenges when exposing large tool catalogs to in-browser agents:
 - **Reduces prompt size**: Exposes only `route_tools` and `execute_capability` to the agent instead of registering dozens of tool schemas simultaneously.
-- **Decouples tool discovery from execution**: Aligns with [W3C WebMCP Issue #218](https://github.com/webmachinelearning/webmcp/issues/218); unregistering tools on view changes does not forcibly abort operations already in progress.
+- **Decouples tool discovery from execution**: Aligns with [WebMCP Draft Specification (§ 3.1 Pending tool executions)](https://webmachinelearning.github.io/webmcp/#pending-tool-executions); unregistering tools on view changes does not forcibly abort operations already in progress.
 - **Scopes tool execution**: Issues short-lived, single-use capability tokens bound to specific tool names.
 - **Flexible Semantic Routing**: Supports on-device multilingual vector search via `webmcp-semantic-router/ai` to handle natural language query variations, with a deterministic CPU keyword scorer as an automatic zero-dependency fallback.
 
@@ -146,7 +146,7 @@ const router = createProgressiveWebMcpRouter({
 | `registerTool` | Surface tools registered on `modelContext` |
 | `ModelContextRegisterToolOptions.signal` | Supported via `AbortController` in `mount` / `unmount` |
 | `ModelContextExecuteToolOptions.signal` | Forwarded through execution proxy |
-| Unregistration lifecycle ([Issue #218](https://github.com/webmachinelearning/webmcp/issues/218)) | In-flight operations tracked and permitted to complete |
+| Execution Lifecycle Tracking | [§ 3.1 Pending tool executions](https://webmachinelearning.github.io/webmcp/#pending-tool-executions) | In-flight operations tracked and permitted to complete |
 | `ToolAnnotations` | Preserved (`readOnlyHint`, `consequentialHint`, etc.) |
 
 ---

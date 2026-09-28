@@ -2,9 +2,9 @@
  * Comprehensive Unit Tests for @webmcp/progressive
  * 
  * Verifies the 4 critical production contracts:
- * 1. In-flight execution protection on tool unregistration (W3C Issue #218)
+ * 1. In-flight execution protection on tool unregistration (WebMCP § 3.1 Pending tool executions)
  * 2. Strict token binding, expiration, single-use, and anti-Confused-Deputy enforcement
- * 3. 100% reproducible deterministic CPU ranking without WebGPU
+ * 3. Deterministic CPU ranking without WebGPU
  * 4. Graceful handling of plan execution across unmount / lifecycle events
  */
 
@@ -74,7 +74,7 @@ const createTestCatalog = (): WebMcpToolDefinition[] => [
 ];
 
 describe('@webmcp/progressive Router Contracts', () => {
-    describe('1. In-flight execution protection on unmount (W3C Issue #218)', () => {
+    describe('1. In-flight execution protection on unmount (WebMCP § 3.1)', () => {
         it('allows slow async executions to complete gracefully even if registry unmounts', async () => {
             const catalog = createTestCatalog();
             const registry = new ProgressiveRegistry({
