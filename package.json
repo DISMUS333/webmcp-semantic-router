@@ -1,0 +1,64 @@
+{
+  "name": "webmcp-semantic-router",
+  "version": "0.1.0-alpha.0",
+  "description": "Progressive WebMCP discovery and capability-scoped execution router.",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./ai": {
+      "types": "./dist/ai/index.d.ts",
+      "import": "./dist/ai/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.package.json",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "@huggingface/transformers": "^3.0.0 || ^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@huggingface/transformers": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@huggingface/transformers": "^4.2.0",
+    "@types/node": "^24.3.0",
+    "typescript": "^5.9.2",
+    "vitest": "^4.1.11"
+  },
+  "keywords": [
+    "webmcp",
+    "w3c",
+    "webml",
+    "mcp",
+    "semantic-router",
+    "capability-token",
+    "agentic-ai",
+    "on-device-ai"
+  ],
+  "author": "DISMUS",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DISMUS333/webmcp-semantic-router.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DISMUS333/webmcp-semantic-router/issues"
+  },
+  "homepage": "https://github.com/DISMUS333/webmcp-semantic-router#readme"
+}
